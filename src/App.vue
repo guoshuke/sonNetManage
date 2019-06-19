@@ -35,7 +35,7 @@
             <Tabs type="card" closable @on-tab-remove="handleTabRemove">
               <TabPane label="标签一" v-if="tab0">
                 <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-                  标签一的内容
+                  <ASmanage></ASmanage>
                 </Content>
               </TabPane>
               <TabPane label="标签二" v-if="tab1">
@@ -56,9 +56,13 @@
 </template>
 
 <script>
+  import ASmanage from './components/ASmanage.vue'
 
 export default {
     name: 'App',
+    components:{
+        ASmanage:ASmanage
+    },
     data () {
         return {
             tab0: true,
