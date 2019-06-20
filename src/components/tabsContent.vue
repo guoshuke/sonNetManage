@@ -1,10 +1,11 @@
 <template>
-    <Tabs type="card" :closable="tabs.length != 1" @on-tab-remove="handleTabRemove">
-        <TabPane v-for="(tab,index) in tabs" :key="index" :label="tab.name" v-if="tab.isShow">
+    <Tabs type="card" :closable="tabs.length != 1" @on-tab-remove="handleTabRemove" v-model="name">
+        <TabPane v-for="(tab,index) in tabs" :key="tab.name" :label="tab.name" :name="tab.name">
             <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
                 <component :is="tab.url"></component>
             </Content>
         </TabPane>
+        <Button @click="handleTabsAdd" size="small" slot="extra">增加</Button>
     </Tabs>
 </template>
 <script>
@@ -18,6 +19,7 @@
         },
         data(){
             return{
+                name:'IP地址管理',
                 tabs:[{
                     name:'子网管理',
                     url:'ASmanage',
@@ -26,10 +28,6 @@
                     name:'IP地址管理',
                     url:'sonNetManage',
                     isShow:true
-                },{
-                    name:'AS号管理',
-                    url:'',
-                    isShow:true
                 }],
             }
         },
@@ -37,13 +35,31 @@
 
         },
         methods: {
-            handleTabRemove(index) {
-                if(this.tabs.length == 1){
-                    this.$Message.warning('最少有一个窗口');
-                }else {
-                    this.tabs.splice(index,1)
+            handleTabRemove(name) {
+                this.tabs.forEach((item,index) => {
+                    if(item.name==name){
+                        this.tabs.splice(index,1)
+                    }
+                })
+                console.log(this.tabs);
+                return false
+            },
+            handleTabsAdd(){
+                var creatItem = {
+                    name:'AS号管理',
+                    url:'',
+                    isShow:true
                 }
-            }
+                var needCreat = true
+                this.tabs.forEach(item => {
+                    if(item.name == creatItem.name){
+                        needCreat = false
+                    }
+                })
+                if(needCreat) this.tabs.push(creatItem);
+                this.name =creatItem.name
+                console.log(this.tabs);
+            },
         }
     }
 </script>
