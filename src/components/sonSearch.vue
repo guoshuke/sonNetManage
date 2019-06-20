@@ -18,6 +18,7 @@
                 <Button icon="ios-refresh" size="small" class="searchButton">重置</Button>
             </Col>
         </Row>
+        <Divider />
     </form>
 </template>
 <script>
@@ -86,8 +87,13 @@
         .searchBar{
             display: flex;
             flex-direction: column;
+            align-items: center;
             .searchButton{
-                padding: 6px 0;
+                width: 60px;
+                /deep/ span{
+                    margin-left:0;
+                }
+                padding: 3px 0;
                 &:first-child{
                     margin-bottom: 8px;
                 }

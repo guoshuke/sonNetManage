@@ -63,6 +63,8 @@
     @{deep} {
         .ivu-layout{
             background-color: #f0f2f5;
+            overflow: hidden;
+            height: 100vh;
         }
         .ivu-tabs-bar {
             margin-bottom: 5px;
