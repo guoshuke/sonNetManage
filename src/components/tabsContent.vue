@@ -1,5 +1,5 @@
 <template>
-    <Tabs type="card" :closable="tabs.length != 1" @on-tab-remove="handleTabRemove" v-model="name">
+    <Tabs type="card" :closable="tabs.length != 1" @on-tab-remove="handleTabRemove" v-model="name" class="tabs">
         <TabPane v-for="(tab,index) in tabs" :key="tab.name" :label="tab.name" :name="tab.name">
             <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
                 <component :is="tab.url"></component>
@@ -64,5 +64,8 @@
     }
 </script>
 <style>
+.tabs{
+    height: 100%;
+}
 
 </style>
