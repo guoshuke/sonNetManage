@@ -19,7 +19,7 @@
         },
         data(){
             return{
-                name:'IP地址管理',
+                name:'子网管理',
                 tabs:[{
                     name:'子网管理',
                     url:'ASmanage',

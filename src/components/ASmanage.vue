@@ -3,24 +3,24 @@
         <!-- 输入框 -->
         <i-form :model="formItem"  label-position="left" id="form">
             <Row type="flex">
-                <i-col span="6" order="1" id="input1">
+                <i-col span="7" order="1" id="input1">
                     <Form-item label="AS号">
                         <i-input :value.sync="formItem.input" v-model="formItem.ASnumber" placeholder="输入文字" class="pinput" ></i-input>
                     </Form-item>
                 </i-col>
-                <i-col span="6" order="2">
+                <i-col span="7" order="2">
                      <Form-item label="省份">
                         <i-input :value.sync="formItem.input" v-model="formItem.province" placeholder="输入文字" class="pinput" ></i-input>
                     </Form-item>
                 </i-col>
-                <i-col span="6" order="3" class="select">
+                <i-col span="7" order="3" class="select">
                     <Form-item label="使用状态">
                         <i-select :model.sync="formItem.select" v-model="formItem.status" class="pinput" >
                             <i-option :value="item.value" v-for="item in formItem.statusList" :key="item.value">{{item.label}}</i-option>
                         </i-select>
                     </Form-item>
                 </i-col>
-                <i-col span="6" order="4" id="search">
+                <i-col span="3" order="4" id="search">
                     <div class="searchBar">
                         <Button type="primary" icon="ios-search" size="small" class="btn1 pbtn">查询</Button>
                         <Button  icon="ios-refresh" size="small" class="pbtn">重置</Button>
@@ -41,16 +41,15 @@
             </Col>
         </Row>
         <!-- 表格区 -->
-        <Table width="100%" border :columns="columns2" :data="data3" class="table"></Table>
+          <Table :columns="columns" border :data="data" size="small" ref="table" class="table1" height="500"></Table>
         <!-- 底部分页 -->
          <Page :total="100" show-elevator show-total show-sizer :page-size-opts='[15,30,45,60]' :page-size='15' id="page" />
          <!-- 新增弹出框 -->
-        <Modal v-model="modal1" width="750">
+        <Modal v-model="modal1" width="750" class="addModal">
             <p slot="header" style="color:#fff;">
                 <span>新增</span>
-                <span>Delete confirmation</span>
             </p>
-            <div style="text-align:center">
+            <div style="text-align:center" class="middleInput">
                 <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80" label-position="right">
                     <div class="formBar">
                         <FormItem label="Name" prop="name">
@@ -63,13 +62,39 @@
                 </Form>
             </div>
             <div slot="footer" class="fbtn">
+                <Button>取消</Button>
                 <Button type="primary">提交</Button>
-                <Button type="primary">退出</Button>
             </div>
         </Modal>
     </div>
 </template>
 <script>
+// 初始化表格数据
+function initData () {
+    var data = []
+    for (var i = 0; i < 15; i++) {
+       let temp = {
+            "name": i+1,
+            "select": Math.random().toFixed(1),
+            "province": Math.random().toFixed(1),
+            "city": Math.random().toFixed(1),
+            "address": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "describe": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1),
+            "zip": Math.random().toFixed(1)
+       }
+       data.push(temp)
+    }
+    return data
+}
     export default {
          data () {
             return {
@@ -82,24 +107,24 @@
                             label:'占用'
                         },
                         {
-                            value:"不占用",
-                            label:'不占用'
+                            value:"预占",
+                            label:'预占'
                         }
                     ],
                     status:''
 
                 },
-                columns2: [
+                columns: [
                     {
                         title: '序',
                         key: 'name',
                         width: 60,
                         fixed: 'left',
-                        size:12
+
                     },
                     {
                         type: 'selection',
-                        key: 'age',
+                        key: 'select',
                         width: 70,
                         align: 'center'
 
@@ -144,89 +169,7 @@
                         key: 'zip',
                     }
                 ],
-                data3: [
-                    {
-                        name: 1,
-                        age: 18,
-                        address: 'New York No. 1 Lake Park',
-                        province: 'America',
-                        city: 'New York',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 24,
-                        address: 'Washington, D.C. No. 1 Lake Park',
-                        province: 'America',
-                        city: 'Washington, D.C.',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 30,
-                        address: 'Sydney No. 1 Lake Park',
-                        province: 'Australian',
-                        city: 'Sydney',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        province: 'Canada',
-                        city: 'Ottawa',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        province: 'Canada',
-                        city: 'Ottawa',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        province: 'Canada',
-                        city: 'Ottawa',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        province: 'Canada',
-                        city: 'Ottawa',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        province: 'Canada',
-                        city: 'Ottawa',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        province: 'Canada',
-                        city: 'Ottawa',
-                        zip: 100000
-                    },
-                    {
-                        name: 1,
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        province: 'Canada',
-                        city: 'Ottawa',
-                        zip: 100000
-                    }
-
-                ],
+                data: initData(),
                 modal1: false,
                 formValidate: {
                     name: '',
@@ -278,30 +221,9 @@
     }
 </script>
 <style lang="less" scoped>
-.box{
-    height: 100%;
-    overflow: hidden;
-    .pinput{
-        width:200px;
-        height:28px;
-        background:rgba(255,255,255,1);
-        border-radius:3px;
-        border:1px solid rgba(215,221,229,1);
-        margin-left:10px;
-    }
-
-    .modal1{
-        height: 298px;
-    }
-    .ivu-modal-header{
-        width:750px;
-        height:50px;
-        background:rgba(66,133,244,1);
-        border-radius:0px 0px 4px 4px;
-    }
-
-}
-
+.pinput{
+    width:200px;
+ }
  #form{
      font-size:12px;
  }
@@ -321,27 +243,25 @@
                 color: rgba(66,133,244,1);
             }
              /deep/ span{
-                    margin-left:0;
+                    margin-left:-5px;
                 }
              .pbtn{
-                width:62px;
+                width:60px;
                 background:rgba(66,133,244,1);
                 border-radius:4px;
                 border:1px solid rgba(66,133,244,1);
                 font-size: 12px;
                 padding: 4px 0;
             }
-
-
         }
-  }
+    }
   #btn1{
       margin-right: 20px;
   }
     .btn{
       width: 88px;
-    margin-right: 10px;
-    font-size: 14px;
+      margin-right: 10px;
+      font-size: 14px;
     img{
         vertical-align: text-top;
         width: 20px;
@@ -359,22 +279,49 @@
         text-align: right;
        font-size: 14px;
   }
- .table{
+ .table1{
      margin-top:20px;
      font-size: 12px;
+      /deep/.ivu-table-small td{
+            height: 36px;
+
+        }
+
  }
  #page{
      margin: 20px;
      float: right;
  }
+//  新增弹出框样式
+.addModal{
+        width: 750px;
+        height: 298px;
+        /deep/.ivu-modal-header {
+        width:750px;
+        height:50px;
+        background:rgba(66,133,244,1);
+        border-radius:0px 0px 4px 4px;
+
+      }
+      /deep/.ivu-modal-close .ivu-icon-ios-close{
+            color:#fff;
+        }
+      /deep/.ivu-modal-body{
+        margin-top:20px;
+        padding:  0 28px 0 77px;
+        box-sizing: border-box;
+    }
+}
  .fbtn{
      text-align: center;
  }
  .formBar{
      display: flex;
-     .rBtn{
-        margin-right: 10px;
-     }
- }
+
+}
+.rBtn{
+margin-left: 90px;
+}
+
 
 </style>
