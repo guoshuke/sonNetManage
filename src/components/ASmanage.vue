@@ -32,8 +32,8 @@
         <!-- 中部按钮 -->
         <Row>
             <Col span="18">
-                <Button type="primary" class="btn"  @click="modal1 = true" ><img src="../assets/icon/icon_add.svg" alt="">新增</Button>
-                <Button type="primary" class="btn"><img src="../assets/icon/icon_edit.svg" alt="">修改</Button>
+                <Button type="primary" class="btn"  @click="showAddModal" ><img src="../assets/icon/icon_add.svg" alt="">新增</Button>
+                <Button type="primary" class="btn" @click="showEditModal" ><img src="../assets/icon/icon_edit.svg" alt="">修改</Button>
                 <Button type="primary" class="btn"><img src="../assets/icon/icon_delete.svg" alt="">删除</Button>
             </Col>
             <Col span="6" class="btn2">
@@ -44,31 +44,15 @@
           <Table :columns="columns" border :data="data" size="small" ref="table" class="table1" height="500"></Table>
         <!-- 底部分页 -->
          <Page :total="100" show-elevator show-total show-sizer :page-size-opts='[15,30,45,60]' :page-size='15' id="page" />
-         <!-- 新增弹出框 -->
-        <Modal v-model="modal1" width="750" class="addModal">
-            <p slot="header" style="color:#fff;">
-                <span>新增</span>
-            </p>
-            <div style="text-align:center" class="middleInput">
-                <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80" label-position="right">
-                    <div class="formBar">
-                        <FormItem label="Name" prop="name">
-                            <Input v-model="formValidate.name" placeholder="Enter your name" />
-                        </FormItem>
-                        <FormItem label="Name" prop="name" class="rBtn">
-                            <Input v-model="formValidate.name" placeholder="Enter your name" class="minput" />
-                        </FormItem>
-                    </div>
-                </Form>
-            </div>
-            <div slot="footer" class="fbtn">
-                <Button>取消</Button>
-                <Button type="primary">提交</Button>
-            </div>
-        </Modal>
+        <!-- As新增模态框 -->
+        <ASAddModal ref="AsAddForm"></ASAddModal>
+        <!-- AS编辑模态框 -->
+        <ASEditModal ref='AsEditForm'></ASEditModal>
     </div>
 </template>
 <script>
+import ASAddModal from './ASAddModal.vue'
+import ASEditModal from './ASEditModal.vue'
 // 初始化表格数据
 function initData () {
     var data = []
@@ -170,53 +154,26 @@ function initData () {
                     }
                 ],
                 data: initData(),
-                modal1: false,
-                formValidate: {
-                    name: '',
-                    mail: '',
-                    city: '',
-                    gender: '',
-                    interest: [],
-                    date: '',
-                    time: '',
-                    desc: ''
-                },
-                ruleValidate: {
-                    name: [
-                        { required: true, message: 'The name cannot be empty', trigger: 'blur' }
-                    ],
-                    mail: [
-                        { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-                        { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
-                    ],
-                    city: [
-                        { required: true, message: 'Please select the city', trigger: 'change' }
-                    ],
-                    gender: [
-                        { required: true, message: 'Please select gender', trigger: 'change' }
-                    ],
-                    interest: [
-                        { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-                        { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-                    ],
-                    date: [
-                        { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
-                    ],
-                    time: [
-                        { required: true, type: 'string', message: 'Please select time', trigger: 'change' }
-                    ],
-                    desc: [
-                        { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-                        { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-                    ]
-                }
+
+        }
+    },
+        methods: {
+            // 显示增加弹出框
+            showAddModal() {
+                this.$refs.AsAddForm.modal1 = true
+            },
+            //显示编辑模态框
+            showEditModal() {
+                  this.$refs.AsEditForm.modal2 = true
             }
-        },
-        methods:{
 
        },
        mounted () {
            this.formItem.status = this.formItem.statusList[0].value
+       },
+       components:{
+           ASAddModal,
+           ASEditModal
        }
     }
 </script>
@@ -292,36 +249,7 @@ function initData () {
      margin: 20px;
      float: right;
  }
-//  新增弹出框样式
-.addModal{
-        width: 750px;
-        height: 298px;
-        /deep/.ivu-modal-header {
-        width:750px;
-        height:50px;
-        background:rgba(66,133,244,1);
-        border-radius:0px 0px 4px 4px;
 
-      }
-      /deep/.ivu-modal-close .ivu-icon-ios-close{
-            color:#fff;
-        }
-      /deep/.ivu-modal-body{
-        margin-top:20px;
-        padding:  0 28px 0 77px;
-        box-sizing: border-box;
-    }
-}
- .fbtn{
-     text-align: center;
- }
- .formBar{
-     display: flex;
-
-}
-.rBtn{
-margin-left: 90px;
-}
 
 
 </style>

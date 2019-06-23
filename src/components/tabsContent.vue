@@ -11,15 +11,17 @@
 <script>
     import ASmanage from './ASmanage.vue'
     import sonNetManage  from './sonNetManage.vue'
+    import ipBusImport  from './ipBusImport.vue'
 
     export default {
         components: {
             ASmanage,
-            sonNetManage
+            sonNetManage,
+            ipBusImport
         },
         data(){
             return{
-                name:'子网管理',
+                name:'IP业务导入',
                 tabs:[{
                     name:'子网管理',
                     url:'ASmanage',
@@ -28,7 +30,12 @@
                     name:'IP地址管理',
                     url:'sonNetManage',
                     isShow:true
-                }],
+                },{
+                    name:'IP业务导入',
+                    url:'ipBusImport',
+                    isShow:true
+                },
+                ],
             }
         },
         mouted(){
