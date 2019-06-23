@@ -3,7 +3,7 @@
         <div class="layout">
             <Layout>
                 <Sider collapsible hide-trigger :style="{background: '#fff',height:'100vh'}" class="slider" collapsed-width="0" v-model="status">
-                    <img :src="status?require('./assets/sliderShow.svg'):require('./assets/sliderHidn.svg')" alt="" @click="status=!status">
+                    <img :src="status?require('./assets/icon/sliderShow.svg'):require('./assets/icon/sliderHidn.svg')" alt="" @click="status=!status">
                     <navBar></navBar>
                 </Sider>
                 <Layout :style="{padding: '20px'}">
@@ -28,18 +28,18 @@
         },
         data() {
             return {
-                status:false
+                status:false    //左侧按钮是否导航条是否关闭
             }
         },
         methods: {
-            tiggerSliderBar(){
+            toggleSliderBar(){
                 this.status=!this.status
             }
         }
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -56,6 +56,11 @@
                 top: 50%;
                 margin-top: -32px;
             }
+        }
+        /deep/ .ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):after{
+            background: url("./assets/icon/Shape.png") no-repeat left;
+            background-size: 8px 100%;
+            width: 8px;
         }
     }
 
@@ -95,6 +100,36 @@
             margin: 0 auto;
             margin-right: 20px;
         }
+    }
+
+    .primaryModal{
+        .ivu-modal-header {
+            background-color: #4285F4;
+            * {
+                color: #fff;
+            }
+        }
+        .ivu-modal-close{
+            i{
+                color: #fff;
+            }
+        }
+        .ivu-modal-footer{
+            height:50px;
+            background:rgba(250,250,250,1);
+            box-shadow:0px -1px 0px 0px rgba(237,237,237,1);
+            border-radius:0px 0px 4px 4px;
+            padding: 7px 18px;
+            text-align:center;
+            button{
+                width: 86px;
+            }
+            button:first-child{
+                border:1px solid #dcdee2;
+                margin-right: 2px;
+            }
+        }
+
     }
 
 </style>

@@ -1,32 +1,47 @@
 <template>
     <div>
         <div class="buttonBar">
-            <Button type="primary"><img src="../assets/icon/icon_add.svg" alt="">新增</Button>
+            <Button type="primary" @click="openModal"><img src="../assets/icon/icon_add.svg" alt="">新增</Button>
             <Button type="primary"><img src="../assets/icon/icon_edit.svg" alt="">修改</Button>
             <Button type="primary"><img src="../assets/icon/icon_delete.svg" alt="">删除</Button>
             <Button type="primary">拆分子网</Button>
             <Button type="primary">合并子网</Button>
-            <Button type="primary">规划</Button>
-            <Button type="primary">取消规划</Button>
-            <Button type="primary" class="fr">导出</Button>
+            <Dropdown style="margin-left: 20px;">
+                <a href="javascript:void(0)">
+                    更多操作
+                    <Icon type="ios-arrow-down"></Icon>
+                </a>
+                <DropdownMenu slot="list">
+                    <DropdownItem>规划</DropdownItem>
+                    <DropdownItem>取消规划</DropdownItem>
+                    <DropdownItem>批量选择</DropdownItem>
+                    <DropdownItem>批量修改</DropdownItem>
+                    <DropdownItem divided>回收站</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+            <Button type="primary" class="fr"><img src="../assets/icon/export.svg" alt="">导出</Button>
         </div>
-        <Table :columns="columns" :data="data" size="small" ref="table" class="sonNetTable"></Table>
+        <Table :columns="columns" :data="data" size="small" ref="table" class="sonNetTable" border height="500" :loading="loading"></Table>
         <div style="margin: 10px;overflow: hidden">
-            <div style="float: right;">
-                <Page :total="100" :current="1" @on-change="changePage"></Page>
+            <div class="fr">
+                <Page :total="100" :current="1" @on-change="changePage" show-total show-elevator show-sizer></Page>
             </div>
         </div>
+        <publicModal width="954" :isShow="showModal">
+            <div>This is the first modal</div>
+        </publicModal>
     </div>
 </template>
 <script>
+    import pModal from "./publicModal.vue"
     function initData() {
         var data = []
-        var n = 15;
+        var n = 55;
         for(let i = 0; i < n ; i++ ){
             let tempObj={
                 "name": i+1,
-                "fav": Math.floor(Math.random()*10000),
-                "show": Math.floor(Math.random()*1000),
+                "fav": Math.floor(Math.random()*1000),
+                "show": Math.floor(Math.random()*10000),
                 "weak": Math.floor(Math.random()*10000),
                 "signin": Math.floor(Math.random()*100000),
                 "click": Math.floor(Math.random()*10000),
@@ -51,7 +66,14 @@
                         "title": "序号",
                         "key": "name",
                         "fixed": "left",
-                        "width": 200
+                        "width": 100
+                    },
+
+                    {
+                        "title": "Weak",
+                        "key": "weak",
+                        "type":"selection",
+                        "width": 100,
                     },
                     {
                         "title": "Show",
@@ -77,11 +99,6 @@
                         }
                     },
                     {
-                        "title": "Weak",
-                        "key": "weak",
-                        "width": 150,
-                    },
-                    {
                         "title": "Signin",
                         "key": "signin",
                         "width": 150,
@@ -98,18 +115,18 @@
                         "width": 150,
                     },
                     {
-                        "title": "7, retained",
+                        "title": "seven",
                         "key": "day7",
                         "width": 150,
                     },
                     {
-                        "title": "30, retained",
+                        "title": "thirty",
                         "key": "day30",
                         "width": 150,
 
                     },
                     {
-                        "title": "The next day left",
+                        "title": "The next",
                         "key": "tomorrow",
                         "width": 150,
                     },
@@ -129,8 +146,20 @@
                         "width": 150,
                     }
                 ],
-                data: initData()
+                data: [],
+                showModal:true,
+                loading:true
             }
+        },
+        components:{
+            publicModal:pModal
+        },
+        mounted(){
+            const self = this
+            setTimeout(()=>{
+                self.data = initData()
+                self.loading = false
+            },3000)
         },
         methods: {
             exportData (type) {
@@ -151,7 +180,10 @@
                     });
                 }
             },
-            changePage(){}
+            changePage(){},
+            openModal(){
+                this.showModal=true
+            }
         }
     }
 </script>
@@ -170,8 +202,9 @@
                 vertical-align: text-top;
                 width: 20px;
                 height: 20px;
-                /* 第一个图标尺寸和另外两个不同  需要单独设置*/
+                margin-right: 3px;
             }
+            /* 第一个图标尺寸和另外两个不同  需要单独设置*/
             &:first-child img{
                 width: 14px;
                 height: 14px;

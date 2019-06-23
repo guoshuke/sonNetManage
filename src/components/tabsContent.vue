@@ -5,7 +5,6 @@
                 <component :is="tab.url"></component>
             </Content>
         </TabPane>
-        <Button @click="handleTabsAdd" size="small" slot="extra">增加</Button>
     </Tabs>
 </template>
 <script>
@@ -19,54 +18,52 @@
             sonNetManage,
             ipBusImport
         },
+        created(){
+            const self = this
+            this.$root.eventHub.$on("changePage",(pageName) => {
+                //$on是监听事件，如果组件一得$emit触发了，$on就会触发this.fn事件
+                console.log(self , this);
+                if(self.name == pageName) return
+                self.name = pageName
+                var hasPage = self.tabs.some(item => {
+                    if(item.name == pageName){
+                        return true
+                    }
+                })
+                if(!hasPage){
+                    self.tabs.push({
+                        name:pageName,
+                        url:self.keys[pageName]||'',
+                    })
+                }
+            })
+        },
         data(){
             return{
-                name:'IP业务导入',
-                tabs:[{
-                    name:'子网管理',
-                    url:'ASmanage',
-                    isShow:true
-                },{
-                    name:'IP地址管理',
-                    url:'sonNetManage',
-                    isShow:true
-                },{
-                    name:'IP业务导入',
-                    url:'ipBusImport',
-                    isShow:true
+                name:'网段管理',                 //控制当前显示的name
+                keys:{                          //键与模板对应表
+                    '网段管理':'sonNetManage',
+                    'AS号管理':'ASmanage',
+                    "IP业务导入":"ipBusImport"
                 },
-                ],
+                tabs:[{                         //初始化要显示的tab
+                    name:'网段管理',
+                    url:'sonNetManage'
+                }],
             }
         },
-        mouted(){
+        mounted(){
 
         },
         methods: {
             handleTabRemove(name) {
                 this.tabs.forEach((item,index) => {
-                    if(item.name==name){
+                    if(item.name == name){
                         this.tabs.splice(index,1)
                     }
                 })
-                console.log(this.tabs);
                 return false
-            },
-            handleTabsAdd(){
-                var creatItem = {
-                    name:'AS号管理',
-                    url:'',
-                    isShow:true
-                }
-                var needCreat = true
-                this.tabs.forEach(item => {
-                    if(item.name == creatItem.name){
-                        needCreat = false
-                    }
-                })
-                if(needCreat) this.tabs.push(creatItem);
-                this.name =creatItem.name
-                console.log(this.tabs);
-            },
+            }
         }
     }
 </script>
