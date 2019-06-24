@@ -27,7 +27,7 @@
                 <Page :total="100" :current="1" @on-change="changePage" show-total show-elevator show-sizer></Page>
             </div>
         </div>
-        <publicModal width="954" :isShow="showModal">
+        <publicModal width="954" :isShow="showModal" title='新增'>
             <div>This is the first modal</div>
         </publicModal>
     </div>
