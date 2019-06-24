@@ -27,13 +27,15 @@
                 <Page :total="100" :current="1" @on-change="changePage" show-total show-elevator show-sizer></Page>
             </div>
         </div>
-        <publicModal width="954" :isShow="showModal">
-            <div>This is the first modal</div>
+
+        <publicModal width="954" title="新增" :isShow.sync="showModal" :toSubmit="toSubmit">
+            <AddOrEditSonNet></AddOrEditSonNet>
         </publicModal>
     </div>
 </template>
 <script>
     import pModal from "./publicModal.vue"
+    import AddOrEditSonNet from  "../components/AddOrEditSonNet.vue"
     function initData() {
         var data = []
         var n = 55;
@@ -147,12 +149,13 @@
                     }
                 ],
                 data: [],
-                showModal:true,
-                loading:true
+                loading:true,
+                showModal:true
             }
         },
         components:{
-            publicModal:pModal
+            publicModal:pModal,
+            AddOrEditSonNet
         },
         mounted(){
             const self = this
@@ -182,7 +185,12 @@
             },
             changePage(){},
             openModal(){
-                this.showModal=true
+                this.showModal = true
+                console.log(this.showModal);
+            },
+            toSubmit(){
+                console.log(2);
+                console.log(this.showModal);
             }
         }
     }
