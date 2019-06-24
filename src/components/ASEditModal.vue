@@ -1,17 +1,17 @@
 <!--  -->
 <template>
   <div>
-      <!-- 编辑弹出框 -->
+      <!-- 编辑的弹出框 -->
         <Modal v-model="modal2" width="750" class="addModal">
             <p slot="header" style="color:#fff;">
-              <span>修改</span>
+                <span>修改</span>
             </p>
             <div style="text-align:center" class="middleInput">
                 <Form ref="formValidate" :model="formData" :rules="ruleValidate" :label-width="80" label-position="right">
                     <div class="formBar">
                         <Form-item  label="省份" prop="province">
                             <Select v-model="formData.province" class="minput">
-                              <Option :value="item.value" v-for="item in formData.provinceList" :key="item.value">{{item.label}}</Option>
+                                <Option :value="item.value" v-for="item in formData.provinceList" :key="item.value">{{item.label}}</Option>
                             </Select>
                         </Form-item>
                         <FormItem label="城市数目" prop="PrNumber" class="rBtn">
@@ -125,7 +125,6 @@ export default {
     height:50px;
     background:rgba(66,133,244,1);
     border-radius:0px 0px 4px 4px;
-
   }
   /deep/.ivu-modal-close .ivu-icon-ios-close{
         color:#fff;
@@ -148,10 +147,8 @@ export default {
 }
  .fbtn{
     text-align: center;
-    .fpbtn{
-      width: 86px;
-      height: 36px;
-    }
+
+
  }
  .formBar{
     display: flex;
