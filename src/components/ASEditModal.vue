@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-      <!-- 编辑弹出框 -->
+      <!-- 编辑的弹出框 -->
         <Modal v-model="modal2" width="750" class="addModal">
             <p slot="header" style="color:#fff;">
                 <span>修改</span>
@@ -125,7 +125,6 @@ export default {
     height:50px;
     background:rgba(66,133,244,1);
     border-radius:0px 0px 4px 4px;
-
   }
   /deep/.ivu-modal-close .ivu-icon-ios-close{
         color:#fff;
