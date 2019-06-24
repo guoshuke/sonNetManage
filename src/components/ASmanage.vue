@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div style="height:100%">
         <!-- 输入框 -->
         <i-form :model="formItem"  label-position="left" id="form">
             <Row type="flex">
@@ -42,9 +42,10 @@
         </Row>
         <!-- 表格区 -->
           <Table :columns="columns" border :data="data" size="small" ref="table" class="table1" height="500"></Table>
+
         <!-- 底部分页 -->
-         <Page :total="100" show-elevator show-total show-sizer :page-size-opts='[15,30,45,60]' :page-size='15' id="page" />
-        <!-- As新增模态框 -->
+        <Page :total="100" show-elevator show-total show-sizer :page-size-opts='[15,30,45,60]' :page-size='15' id="page" />
+           <!-- As新增模态框 -->
         <ASAddModal ref="AsAddForm"></ASAddModal>
         <!-- AS编辑模态框 -->
         <ASEditModal ref='AsEditForm'></ASEditModal>
@@ -65,11 +66,6 @@ function initData () {
             "address": Math.random().toFixed(1),
             "zip": Math.random().toFixed(1),
             "describe": Math.random().toFixed(1),
-            "zip": Math.random().toFixed(1),
-            "zip": Math.random().toFixed(1),
-            "zip": Math.random().toFixed(1),
-            "zip": Math.random().toFixed(1),
-            "zip": Math.random().toFixed(1),
             "zip": Math.random().toFixed(1),
             "zip": Math.random().toFixed(1),
             "zip": Math.random().toFixed(1),
@@ -126,7 +122,7 @@ function initData () {
                     {
                         title: '城市数目',
                         key: 'address',
-                        width: 250
+                        width: 100
                     },
                     {
                         title: 'AS数量',
@@ -151,6 +147,8 @@ function initData () {
                     {
                         title: '备注',
                         key: 'zip',
+                        width: 100
+
                     }
                 ],
                 data: initData(),
@@ -164,7 +162,7 @@ function initData () {
             },
             //显示编辑模态框
             showEditModal() {
-                  this.$refs.AsEditForm.modal2 = true
+                this.$refs.AsEditForm.modal2 = true
             }
 
        },
@@ -182,16 +180,16 @@ function initData () {
     width:200px;
  }
  #form{
-     font-size:12px;
+    font-size:12px;
  }
   #search{
-      margin-top: 2px;
-      font-size:12px;
-      text-align: right;
-      float: left;
-        /* margin: 0 auto; */
-        .searchBar{
-            display: inline-block;
+    margin-top: 2px;
+    font-size:12px;
+    text-align: right;
+    float: left;
+    /* margin: 0 auto; */
+    .searchBar{
+        display: inline-block;
             button:first-child{
                 margin-right: 10px;
             }
@@ -199,10 +197,10 @@ function initData () {
                 background: #fff;
                 color: rgba(66,133,244,1);
             }
-             /deep/ span{
-                    margin-left:-5px;
-                }
-             .pbtn{
+            /deep/ span{
+                margin-left:-5px;
+            }
+                .pbtn{
                 width:60px;
                 background:rgba(66,133,244,1);
                 border-radius:4px;
@@ -230,20 +228,17 @@ function initData () {
         margin-right: 4px;
         vertical-align: middle;
     }
-
   }
   .btn2{
         text-align: right;
        font-size: 14px;
   }
  .table1{
-     margin-top:20px;
-     font-size: 12px;
-      /deep/.ivu-table-small td{
+    margin-top:20px;
+    font-size: 12px;
+        /deep/.ivu-table-small td{
             height: 36px;
-
         }
-
  }
  #page{
      margin: 20px;

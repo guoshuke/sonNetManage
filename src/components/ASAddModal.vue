@@ -1,54 +1,52 @@
 <!--  -->
 <template>
-  <div>
-      <!-- 新增弹出框 -->
-        <Modal v-model="modal1" width="750" class="addModal">
-            <p slot="header" style="color:#fff;">
-              <span>新增</span>
-            </p>
-            <div style="text-align:center" class="middleInput">
-                <Form ref="formValidate" :model="formData" :rules="ruleValidate" :label-width="80" label-position="right">
-                    <div class="formBar">
-                        <Form-item  label="省份" prop="province">
-                            <Select v-model="formData.province" class="minput">
-                              <Option :value="item.value" v-for="item in formData.provinceList" :key="item.value">{{item.label}}</Option>
-                            </Select>
-                        </Form-item>
-                        <FormItem label="城市数目" prop="PrNumber" class="rBtn">
-                            <Input v-model="formData.PrNumber" placeholder="输入文字" class="minput" />
-                        </FormItem>
-                    </div>
-                    <div class="formBar">
-                        <Form-item  label="AS数量" prop="ASNumber">
-                          <Input v-model="formData.ASNumber" class="minput" />
-                        </Form-item>
-                        <FormItem label="AS名称" prop="ASName" class="rBtn">
-                          <Input v-model="formData.ASName" placeholder="输入文字" class="minput" />
-                        </FormItem>
-                    </div>
-                    <div class="formBar">
-                        <Form-item  label="用途描述" prop="useDescription" >
-                          <Input v-model="formData.useDescription" class="minput" placeholder="输入文字" />
-                        </Form-item>
-                        <Form-item  label="是否公有" prop="isPublic" class="rBtn">
-                            <Select v-model="formData.isPublic" class="minput">
-                              <Option :value="item.value" v-for="item in formData.isPublicList" :key="item.value">{{item.label}}</Option>
-                            </Select>
-                        </Form-item>
-                    </div>
-                    <div class="formBar">
-                        <Form-item  label="备注" prop="">
-                          <Input v-model="formData.remark" class="minput" placeholder="输入文字" />
-                        </Form-item>
-                    </div>
-                </Form>
-            </div>
-            <div slot="footer" class="fbtn">
-              <Button @click="handleEsc" class="fpbtn">取消</Button>
-              <Button type="primary" class="fpbtn">提交</Button>
-            </div>
-        </Modal>
-  </div>
+    <!-- 新增弹出框 -->
+    <Modal v-model="modal1" width="750" class="addModal">
+        <p slot="header" style="color:#fff;">
+            <span>新增</span>
+        </p>
+        <div style="text-align:center" class="middleInput">
+            <Form ref="formValidate" :model="formData" :rules="ruleValidate" :label-width="80" label-position="right">
+                <div class="formBar">
+                    <Form-item  label="省份" prop="province">
+                        <Select v-model="formData.province" class="minput">
+                            <Option :value="item.value" v-for="item in formData.provinceList" :key="item.value">{{item.label}}</Option>
+                        </Select>
+                    </Form-item>
+                    <FormItem label="城市数目" prop="PrNumber" class="rBtn">
+                        <Input v-model="formData.PrNumber" placeholder="输入文字" class="minput" />
+                    </FormItem>
+                </div>
+                <div class="formBar">
+                    <Form-item  label="AS数量" prop="ASNumber">
+                        <Input v-model="formData.ASNumber" class="minput" />
+                    </Form-item>
+                    <FormItem label="AS名称" prop="ASName" class="rBtn">
+                        <Input v-model="formData.ASName" placeholder="输入文字" class="minput" />
+                    </FormItem>
+                </div>
+                <div class="formBar">
+                    <Form-item  label="用途描述" prop="useDescription" >
+                        <Input v-model="formData.useDescription" class="minput" placeholder="输入文字" />
+                    </Form-item>
+                    <Form-item  label="是否公有" prop="isPublic" class="rBtn">
+                        <Select v-model="formData.isPublic" class="minput">
+                            <Option :value="item.value" v-for="item in formData.isPublicList" :key="item.value">{{item.label}}</Option>
+                        </Select>
+                    </Form-item>
+                </div>
+                <div class="formBar">
+                    <Form-item  label="备注" prop="">
+                        <Input v-model="formData.remark" class="minput" placeholder="输入文字" />
+                    </Form-item>
+                </div>
+            </Form>
+        </div>
+        <div slot="footer" class="fbtn">
+            <Button @click="handleEsc" class="fpbtn">取消</Button>
+            <Button type="primary" class="fpbtn">提交</Button>
+        </div>
+    </Modal>
 </template>
 
 <script>
@@ -108,7 +106,6 @@ export default {
     }
   },
   mounted () {
-
     this.formData.province = this.formData.provinceList[0].value
     this.formData.isPublic = this.formData.isPublicList[0].value
   }
@@ -118,7 +115,6 @@ export default {
 <style lang='less' scoped>
     //  新增弹出框样式
 .addModal{
-    width: 750px;
     height: 298px;
     /deep/.ivu-modal-header {
     width:750px;

@@ -83,18 +83,18 @@ export default {
   border-radius:3px;
   border:1px solid rgba(66,133,244,1);
   line-height: 19px;
-  margin-right: 10px;
+  margin-right: 8px;
   color:rgba(66,133,244,1);
 }
 .priBtn{
-    height:28px;
+  height:28px;
   border-radius:3px;
   line-height: 19px;
-  margin-right: 30px;
+  margin-right: 18px;
 
 }
 .fileInput{
-  width:300px;
+  width:240px;
   height:28px;
   background:rgba(255,255,255,1);
   border-radius:4px;
