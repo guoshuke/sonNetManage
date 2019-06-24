@@ -1,5 +1,5 @@
 <template>
-    <Modal v-model="show" draggable scrollable :title="title" :width="width||954" class-name="primaryModal" okText="提交" @on-ok="func" @on-cancel="func" >
+    <Modal v-model="show" scrollable :title="title" :width="width||'954px'" mask class-name="primaryModal" okText="提交" @on-ok="func" @on-cancel="func" >
         <slot></slot>
     </Modal>
 </template>
