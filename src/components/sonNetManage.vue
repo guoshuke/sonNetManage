@@ -10,8 +10,17 @@
     export default {
         components: {
             sonSearch,
-            sonTable
+            sonTable,
+
         },
+        data(){
+            return{
+                showModal:true,
+            }
+        },
+        methods:{
+
+        }
     }
 </script>
 <style>

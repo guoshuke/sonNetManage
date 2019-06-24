@@ -1,6 +1,5 @@
 <!--  -->
 <template>
-      <!-- 编辑弹出框 -->
     <Modal v-model="modal2" width="750" class="editModal">
         <p slot="header" style="color:#fff;">
             <span>修改</span>

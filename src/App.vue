@@ -69,7 +69,7 @@
         .ivu-layout{
             background-color: #f0f2f5;
             overflow: hidden;
-            height: 100vh;
+            /*height: 100vh;*/
         }
         .ivu-tabs-bar {
             margin-bottom: 5px;
@@ -103,6 +103,13 @@
     }
 
     .primaryModal{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .ivu-modal{
+            top: 0;
+        }
         .ivu-modal-header {
             background-color: #4285F4;
             * {
@@ -113,6 +120,9 @@
             i{
                 color: #fff;
             }
+        }
+        .ivu-modal-body{
+            border: none;
         }
         .ivu-modal-footer{
             height:50px;

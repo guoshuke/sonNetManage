@@ -46,14 +46,17 @@
         <!-- 底部分页 -->
         <Page :total="100" show-elevator show-total show-sizer :page-size-opts='[15,30,45,60]' :page-size='15' id="page" />
            <!-- As新增模态框 -->
-        <ASAddModal ref="AsAddForm"></ASAddModal>
+        <publicModal width="750px" title="新增" :isShow.sync="showModal" :toSubmit="toSubmit">
+            <ASAddModal ref="AsAddForm"></ASAddModal>
+        </publicModal>
         <!-- AS编辑模态框 -->
-        <ASEditModal ref='AsEditForm'></ASEditModal>
+        <!--<ASEditModal ref='AsEditForm'></ASEditModal>-->
     </div>
 </template>
 <script>
 import ASAddModal from './ASAddModal.vue'
 import ASEditModal from './ASEditModal.vue'
+import publicModal  from '../public_components/publicModal.vue'
 // 初始化表格数据
 function initData () {
     var data = []
@@ -78,6 +81,7 @@ function initData () {
     export default {
          data () {
             return {
+                showModal:true,
                 formItem: {
                     Asnumber:0,
                     province:'',
@@ -163,7 +167,8 @@ function initData () {
             //显示编辑模态框
             showEditModal() {
                 this.$refs.AsEditForm.modal2 = true
-            }
+            },
+            toSubmit(){}
 
        },
        mounted () {
@@ -171,7 +176,8 @@ function initData () {
        },
        components:{
            ASAddModal,
-           ASEditModal
+           ASEditModal,
+           publicModal
        }
     }
 </script>
