@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-    <Modal v-model="modal2" width="750" class="editModal">
+    <div>
         <p slot="header" style="color:#fff;">
             <span>修改</span>
         </p>
@@ -45,7 +45,7 @@
             <Button @click="handleEsc" class="fpbtn">取消</Button>
             <Button type="primary" class="fpbtn">提交</Button>
         </div>
-    </Modal>
+    </div>
 </template>
 
 <script>
@@ -113,7 +113,6 @@ export default {
 <style lang='less' scoped>
     //  新增弹出框样式
 .editModal{
-    height: 298px;
     /deep/.ivu-modal-header {
     width:750px;
     height:50px;
