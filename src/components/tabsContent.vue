@@ -10,7 +10,7 @@
 <script>
     import ASmanage from './ASmanage.vue'
     import sonNetManage  from './sonNetManage.vue'
-    import IpBusImport  from './IpBusImport.vue'
+    import IpBusImport  from './ipBusImport.vue'
     import ImportHistory  from './ImportHistory.vue'
     import ImportDaily  from './ImportDaily.vue'
 
