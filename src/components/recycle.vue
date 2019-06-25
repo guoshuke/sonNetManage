@@ -1,30 +1,9 @@
 <template>
     <div>
-        <div class="buttonBar" v-if="name=='网段管理'">
-            <Button type="primary" @click="openModal('新增')"><img src="../assets/icon/icon_add.svg" alt="">新增</Button>
-            <Button type="primary" @click="openModal('修改')"><img src="../assets/icon/icon_edit.svg" alt="">修改</Button>
-            <Button type="primary" @click="delelteData('删除')"><img src="../assets/icon/icon_delete.svg" alt="">删除</Button>
-            <Button type="primary">拆分子网</Button>
-            <Button type="primary">合并子网</Button>
-            <Dropdown style="margin-left: 20px;">
-                <a href="javascript:void(0)">
-                    更多操作
-                    <Icon type="ios-arrow-down"></Icon>
-                </a>
-                <DropdownMenu slot="list">
-                    <!--<DropdownItem>规划</DropdownItem>-->
-                    <!--<DropdownItem>取消规划</DropdownItem>-->
-                    <DropdownItem @click="openModal('批量选择')">批量选择</DropdownItem>
-                    <DropdownItem @click="openModal('批量修改')">批量修改</DropdownItem>
-                    <DropdownItem divided @click="openModal('回收站')">回收站</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-            <Button type="primary" class="fr" @click="openModal('导出')"><img src="../assets/icon/export.svg" alt="" >导出</Button>
-        </div>
-        <div class="buttonBar" v-if="name=='IP地址管理'">
-            <Button type="primary" v-show="false" @click="openModal('新增')"><img src="../assets/icon/icon_add.svg" alt="">新增</Button>
-            <Button type="primary" @click="openModal('修改')"><img src="../assets/icon/icon_edit.svg" alt="">修改</Button>
-            <Button type="primary" class="fr" @click="openModal('导出')"><img src="../assets/icon/export.svg" alt="" >导出</Button>
+        <div class="buttonBar" >
+            <Button type="primary"  @click="reset"><img src="../assets/icon/icon_add.svg" alt="">还原</Button>
+            <Button type="primary"  @click="openModal"><img src="../assets/icon/icon_edit.svg" alt="">彻底删除</Button>
+            <Button type="primary" class="fr" @click="exportData"><img src="../assets/icon/export.svg" alt="" >导出</Button>
         </div>
         <Table :columns="columns" :data="data" size="small" ref="table" class="sonNetTable" border height="500" :loading="loading"></Table>
         <div style="margin: 10px;overflow: hidden">
@@ -32,20 +11,9 @@
                 <Page :total="100" :current="1" @on-change="changePage" show-total show-elevator show-sizer></Page>
             </div>
         </div>
-        <publicModal :width="modalTitle=='导出'||modalTitle=='批量选择'?'50%':modalTitle=='批量修改'?'60%':'80%'" :title="modalTitle" :isShow.sync="showModal" :toSubmit="toSubmit">
-            <AddOrEditSonNet :title="modalTitle" v-if="modalTitle=='新增'|| modalTitle=='修改'||modalTitle=='批量修改'"></AddOrEditSonNet>
-            <exportTable v-if="modalTitle=='导出'"></exportTable>
-            <batchSelect v-if="modalTitle=='批量选择'"></batchSelect>
-            <recycle v-if="modalTitle=='回收站'"></recycle>
-        </publicModal>
     </div>
 </template>
 <script>
-    import pModal from "./publicModal.vue"
-    import AddOrEditSonNet from  "../components/AddOrEditSonNet.vue"
-    import exportTable  from "../components/exportTable.vue"
-    import batchSelect from '../components/batchSelect.vue'
-    import recycle  from '../components/recycle.vue'
     function initData() {
         var data = []
         var n = 55;
@@ -69,11 +37,9 @@
         }
         return data
     }
-
     export default {
-        props:['name'],
-        data () {
-            return {
+        data(){
+            return{
                 columns: [
                     {
                         "title": "序号",
@@ -160,54 +126,50 @@
                     }
                 ],
                 data: [],
-                loading:true,
-                showModal:true,
-                modalTitle:'回收站'
+                loading:true
 
             }
-        },
-        components:{
-            publicModal:pModal,
-            AddOrEditSonNet,
-            exportTable,
-            batchSelect,
-            recycle
         },
         mounted(){
             const self = this
             setTimeout(()=>{
                 self.data = initData()
                 self.loading = false
-            },3000)
+            },100)
         },
-        methods: {
-            changePage(){},
+        methods:{
+            reset(){
+                this.$Modal.success({
+                    title: "还原成功",
+                    content: ''
+                });
+            },
             openModal(m){
                 console.log(m);
                 this.modalTitle=m
-                this.showModal = true
-                console.log(this.showModal);
-            },
-            toSubmit(){
-                console.log(2);
-                console.log(this.showModal);
-            },
-            delelteData(){
                 this.$Modal.confirm({
-                    title: '删除',
-                    content: '<p>确认删除吗</p>',
+                    title: '确认彻底删除吗',
+                    content: '',
                     onOk: () => {
-                        this.$Message.info('取消');
+                        this.$Message.info('Clicked ok');
                     },
                     onCancel: () => {
-                        this.$Message.info('确定');
+                        this.$Message.info('Clicked cancel');
                     }
                 });
+            },
+            exportData(){
+                this.$Modal.success({
+                    title: "导出成功",
+                    content: ''
+                });
             }
+        },
+        components:{
+
         }
     }
 </script>
-
 <style lang="less" scoped>
     .fr{
         float: right !important;

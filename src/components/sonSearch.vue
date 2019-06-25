@@ -3,7 +3,7 @@
         <Row type="flex" justify="center" align="middle" :gutter="64">
             <Col span="21" style="position: relative;">
                 <Row>
-                    <Col span="8" v-for="item in inputList" class="i-inputs">
+                    <Col span="8" v-for="item in (isIpAddressManage?IPsearchList:inputList)" class="i-inputs">
                         {{item.lable}}
                         <Input class="i-input" v-model="item.value" :placeholder="item.placeholder" v-if="item.type=='input'"/>
                         <Select class="i-input" v-model="item.value" v-if="item.type=='select'">
@@ -23,9 +23,12 @@
 </template>
 <script>
     export default {
+        props:['name'],
         data(){
             return{
-                inputList:[{
+                isIpAddressManage:this.name=='IP地址管理',
+                inputList:[
+                    {
                     lable:'子网名称',
                     type:'input',
                     placeholder:'输入文字',
@@ -60,7 +63,39 @@
                     type:'select',
                     options:[{value:0,label:'未选择'}],
                     value:0
-                }]
+                }],
+                IPsearchList:[
+                    {
+                        lable:'IP地址',
+                        type:'input',
+                        placeholder:'输入文字',
+                        value:''
+                    },{
+                        lable:'上一级网段名称',
+                        type:'input',
+                        placeholder:'输入文字',
+                        value:''
+                    },{
+                        lable:'版本',
+                        type:'select',
+                        options:[{value:0,label:'IPV4'}],
+                        value:0
+                    },{
+                        lable:'地址类型',
+                        type:'select',
+                        options:[{value:0,label:'未选择'}],
+                        value:0
+                    },{
+                        lable:'使用状态',
+                        type:'select',
+                        options:[{value:0,label:'未选择'}],
+                        value:0
+                    },{
+                        lable:'所属区域',
+                        type:'input',
+                        placeholder:'输入文字',
+                        value:''
+                    }],
             }
         }
     }

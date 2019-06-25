@@ -1,13 +1,14 @@
 <template>
     <div>
-        <sonSearch></sonSearch>
-        <sonTable></sonTable>
+        <sonSearch :name="name"></sonSearch>
+        <sonTable :name="name"></sonTable>
     </div>
 </template>
 <script>
     import sonSearch from './sonSearch.vue'
     import sonTable    from '../public_components/public_table.vue'
     export default {
+        props:['name'],
         components: {
             sonSearch,
             sonTable,
