@@ -10,13 +10,17 @@
 <script>
     import ASmanage from './ASmanage.vue'
     import sonNetManage  from './sonNetManage.vue'
-    import ipBusImport  from './ipBusImport.vue'
+    import IpBusImport  from './IpBusImport.vue'
+    import ImportHistory  from './ImportHistory.vue'
+    import ImportDaily  from './ImportDaily.vue'
 
     export default {
         components: {
             ASmanage,
             sonNetManage,
-            ipBusImport
+            IpBusImport,
+            ImportHistory,
+            ImportDaily
         },
         created(){
             const self = this
@@ -44,6 +48,9 @@
                 keys:{                          //键与模板对应表
                     '网段管理':'sonNetManage',
                     'AS号管理':'ASmanage',
+                    "IP业务导入":"IpBusImport",
+                    "导入历史查看":"ImportHistory",
+                    "导入日志查看":"ImportDaily",
                     "IP业务导入":"ipBusImport",
                     "IP地址管理":'sonNetManage'
                 },
