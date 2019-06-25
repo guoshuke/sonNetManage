@@ -4,8 +4,8 @@
             <Button type="primary" @click="openModal('新增')"><img src="../assets/icon/icon_add.svg" alt="">新增</Button>
             <Button type="primary" @click="openModal('修改')"><img src="../assets/icon/icon_edit.svg" alt="">修改</Button>
             <Button type="primary" @click="delelteData('删除')"><img src="../assets/icon/icon_delete.svg" alt="">删除</Button>
-            <Button type="primary">拆分子网</Button>
-            <Button type="primary">合并子网</Button>
+            <Button type="primary" @click="openModal('拆分子网')">拆分子网</Button>
+            <Button type="primary" @click="delelteData('合并成功')">合并子网</Button>
             <Dropdown style="margin-left: 20px;">
                 <a href="javascript:void(0)">
                     更多操作
@@ -32,11 +32,12 @@
                 <Page :total="100" :current="1" @on-change="changePage" show-total show-elevator show-sizer></Page>
             </div>
         </div>
-        <publicModal :width="modalTitle=='导出'||modalTitle=='批量选择'?'50%':modalTitle=='批量修改'?'60%':'80%'" :title="modalTitle" :isShow.sync="showModal" :toSubmit="toSubmit">
+        <publicModal :width="modalTitle=='导出'||modalTitle=='批量选择'|| modalTitle=='拆分子网'?'50%':modalTitle=='批量修改'?'60%':'80%'" :title="modalTitle" :isShow.sync="showModal" :toSubmit="toSubmit">
             <AddOrEditSonNet :title="modalTitle" v-if="modalTitle=='新增'|| modalTitle=='修改'||modalTitle=='批量修改'"></AddOrEditSonNet>
             <exportTable v-if="modalTitle=='导出'"></exportTable>
             <batchSelect v-if="modalTitle=='批量选择'"></batchSelect>
             <recycle v-if="modalTitle=='回收站'"></recycle>
+            <splitElement v-if="modalTitle=='拆分子网'"></splitElement>
         </publicModal>
     </div>
 </template>
@@ -46,6 +47,7 @@
     import exportTable  from "../components/exportTable.vue"
     import batchSelect from '../components/batchSelect.vue'
     import recycle  from '../components/recycle.vue'
+    import splitElement from '../components/SplitElement.vue'
     function initData() {
         var data = []
         var n = 55;
@@ -171,7 +173,8 @@
             AddOrEditSonNet,
             exportTable,
             batchSelect,
-            recycle
+            recycle,
+            splitElement
         },
         mounted(){
             const self = this
@@ -192,10 +195,10 @@
                 console.log(2);
                 console.log(this.showModal);
             },
-            delelteData(){
+            delelteData(info){
                 this.$Modal.confirm({
-                    title: '删除',
-                    content: '<p>确认删除吗</p>',
+                    title: info,
+                    content: ``,
                     onOk: () => {
                         this.$Message.info('取消');
                     },

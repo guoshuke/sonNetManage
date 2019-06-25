@@ -13,6 +13,7 @@
     import IpBusImport  from './ipBusImport.vue'
     import ImportHistory  from './ImportHistory.vue'
     import ImportDaily  from './ImportDaily.vue'
+    import reportManae from './ReportManagement.vue'
 
     export default {
         components: {
@@ -20,7 +21,8 @@
             sonNetManage,
             IpBusImport,
             ImportHistory,
-            ImportDaily
+            ImportDaily,
+            reportManae
         },
         created(){
             const self = this
@@ -52,7 +54,9 @@
                     "导入历史查看":"ImportHistory",
                     "导入日志查看":"ImportDaily",
                     "IP业务导入":"ipBusImport",
-                    "IP地址管理":'sonNetManage'
+                    "IP地址管理":'sonNetManage',
+                    "业务类型统计表":"reportManae",
+                    "导入进度表":"reportManae"
                 },
                 tabs:[{                         //初始化要显示的tab
                     name:'网段管理',
