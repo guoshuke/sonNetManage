@@ -161,7 +161,7 @@
                 ],
                 data: [],
                 loading:true,
-                showModal:true,
+                showModal:false,
                 modalTitle:'回收站'
 
             }

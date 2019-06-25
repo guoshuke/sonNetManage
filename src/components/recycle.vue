@@ -177,7 +177,7 @@
     .buttonBar{
         margin-bottom:20px;
         /deep/ .ivu-btn{
-            width: 88px;
+            min-width: 88px;
             margin-right: 10px;
             font-size: 14px;
             img{
