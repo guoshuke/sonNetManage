@@ -1,3 +1,4 @@
+
 <template>
     <Menu active-name="1-2" class="sliderBar" theme="light" width="auto" :open-names="[navList[0].name]" @on-select="toggleNav">
         <!-- <Submenu name="1">
@@ -114,7 +115,17 @@
                                         children:[]
                                     }
                                 ]
-                            }]
+                            },
+                            {
+                                name: '物联网',
+                                children:[
+                                    {
+                                        name:'APN数据基础维护',
+                                        children: []
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
