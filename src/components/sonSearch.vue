@@ -46,7 +46,7 @@
                 },{
                     lable:'使用状态',
                     type:'select',
-                    options:[{value:0,label:'未选择'}],
+                    options:[{type:0,label:'未选择'}],
                     value:0
                 },{
                     lable:'管理状态',

@@ -14,6 +14,7 @@
     import ImportHistory  from './ImportHistory.vue'
     import ImportDaily  from './ImportDaily.vue'
     import reportManae from './ReportManagement.vue'
+    import APNManage from './APNManage'
 
     export default {
         components: {
@@ -22,7 +23,8 @@
             IpBusImport,
             ImportHistory,
             ImportDaily,
-            reportManae
+            reportManae,
+            APNManage
         },
         created(){
             const self = this
@@ -46,7 +48,7 @@
         },
         data(){
             return{
-                name:'网段管理',                 //控制当前显示的name
+                name:'APN数据基础维护',                 //控制当前显示的name
                 keys:{                          //键与模板对应表
                     '网段管理':'sonNetManage',
                     'AS号管理':'ASmanage',
@@ -56,11 +58,12 @@
                     "IP业务导入":"ipBusImport",
                     "IP地址管理":'sonNetManage',
                     "业务类型统计表":"reportManae",
-                    "导入进度表":"reportManae"
+                    "导入进度表":"reportManae",
+                    'APN数据基础维护':'APNManage'
                 },
                 tabs:[{                         //初始化要显示的tab
-                    name:'网段管理',
-                    url:'sonNetManage'
+                    name:'APN数据基础维护',
+                    url:'APNManage'
                 }],
             }
         },
