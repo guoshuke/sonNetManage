@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    //public
+    //public 456
     import navBar from './public_components/navBar.vue'
     import tabsContent from './components/tabsContent.vue'
 
