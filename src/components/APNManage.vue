@@ -103,7 +103,7 @@
             value: 0
           },
           {
-            label: '通用申请工单编号'
+            label: '通用申请工单编号',
             type: 'input',
             placeholder: '请输入',
             key: 'gongdanNum',

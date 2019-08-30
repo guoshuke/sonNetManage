@@ -1,6 +1,6 @@
 <template>
     <Tabs type="card" :closable="tabs.length != 1" @on-tab-remove="handleTabRemove" v-model="name" class="tabs">
-        <TabPane v-for="(tab,index) in tabs" :key="tab.name" :label="tab.name" :name="tab.name">
+        <TabPane v-for="tab in tabs" :key="tab.name" :label="tab.name" :name="tab.name">
             <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
                 <component :is="tab.url" :name="tab.name"></component>
             </Content>
@@ -33,7 +33,7 @@
                 console.log(self , this);
                 if(self.name == pageName) return
                 self.name = pageName
-                var hasPage = self.tabs.some(item => {
+                let hasPage = self.tabs.some(item => {
                     if(item.name == pageName){
                         return true
                     }
